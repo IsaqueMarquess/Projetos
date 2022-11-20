@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MÁQUINA DE MEMES</title>
+    <link rel="stylesheet" href="/DIO/css/style.css">
+    <link rel="stylesheet" href="/DIO/css/reset.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="app" id="image-donwload">
+            <div class="logo">
+                <img 
+                 src="/DIO/pictures/logo.png" 
+                 alt="logo-dio" 
+                 style="height: 60px;height: 60px ;">
+            </div>
+
+            <div class="app-image">
+                <textarea
+                name=""
+                class="text-box"
+                placeholder="Digite seu meme"
+                aria-multiline="true"
+                ></textarea>
+
+                <div id="display-image"></div>
+
+                <textarea
+                name=""
+                class="text-box"
+                placeholder="Digite seu meme"
+                aria-multiline="true"
+                ></textarea>
+
+            </div>
+            <div class="app-photo-picker">
+                <select id="meme-list" onchange="changeBackground(this.value)"></select>
+
+                <input 
+                 type="file" 
+                 id="image-input"
+                 accept="image/jpeg, image/png, image/jpg"
+                 >
+            </div>
+            <div class="download">
+                <button id="btn-donwload">Donwload</button>
+            </div>
+        </div>
+        
+    </div>
+
+<script src="/DIO/Javascript/script.js"></script>
+<script src="/DIO/Javascript/html2Canvas.js"></script>
+<script>
+
+ document.querySelector("#btn-donwload").onclick = () =>{
+      const screenshotPrint = document.querySelector("#image-donwload")
+
+      html2canvas(screenshotPrint).then((canvas)=>{
+        const base64Image = canvas.toDataURL("image/png")
+        let anchor = document.createElement("a")
+        anchor.setAttribute("href", base64Image)
+        anchor.setAttribute("download", "my-meme.png")
+        anchor.click()
+        anchor.remove()
+      })
+    }
+</script>
+
+</body>
+</html>
